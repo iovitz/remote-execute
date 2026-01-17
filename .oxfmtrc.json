@@ -1,0 +1,12 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "ignorePatterns": [
+    "**/*.{md,lock,json}",
+    ".next/**",
+    "out/**",
+    "build/**",
+    "next-env.d.ts",
+    "**/*.lock",
+    "lib/prisma/client/**"
+  ]
+}

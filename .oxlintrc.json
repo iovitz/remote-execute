@@ -1,0 +1,46 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "ignorePatterns": [
+    ".next/**",
+    "out/**",
+    "build/**",
+    "next-env.d.ts",
+    "**/*.lock",
+    "lib/prisma/client/**"
+  ],
+  "plugins": [
+    "eslint",
+    "import",
+    "typescript",
+    "unicorn",
+    "jsx-a11y",
+    "nextjs",
+    "react",
+    "promise"
+  ],
+  "env": {
+    "browser": true
+  },
+  "globals": {
+    "foo": "readonly"
+  },
+  "settings": {},
+  "rules": {
+    "eqeqeq": "warn",
+    "import/no-cycle": "error",
+    "react/self-closing-comp": [
+      "error",
+      {
+        "html": false
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["*.test.ts", "*.spec.ts"],
+      "rules": {
+        "@typescript-eslint/no-explicit-any": "off"
+      }
+    }
+  ]
+}
