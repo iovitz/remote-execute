@@ -1,5 +1,5 @@
 {
-	"name": "remote-execute",
+	"name": "ink-cli-demo",
 	"version": "0.0.0",
 	"license": "MIT",
 	"bin": "dist/cli.js",
@@ -8,44 +8,46 @@
 		"node": ">=16"
 	},
 	"scripts": {
-		"build": "babel --out-dir=dist source",
-		"dev:all": "concurrently \"npm:dev\" \"nodemon dist/cli.js\"",
-		"dev": "babel --out-dir=dist --watch source",
+		"build": "tsc",
+		"dev": "tsc --watch",
 		"test": "prettier --check . && xo && ava"
 	},
 	"files": [
 		"dist"
 	],
 	"dependencies": {
+		"fullscreen-ink": "^0.1.0",
 		"ink": "^4.1.0",
+		"ink-big-text": "^2.0.0",
+		"ink-gradient": "^3.0.0",
+		"ink-select-input": "^6.2.0",
 		"meow": "^11.0.0",
-		"react": "^18.2.0",
-		"window-size": "^1.1.1"
+		"react": "^18.2.0"
 	},
 	"devDependencies": {
-		"@babel/cli": "^7.21.0",
-		"@babel/preset-react": "^7.18.6",
+		"@sindresorhus/tsconfig": "^3.0.1",
+		"@types/react": "^18.0.32",
 		"@vdemedes/prettier-config": "^2.0.1",
 		"ava": "^5.2.0",
 		"chalk": "^5.2.0",
-		"concurrently": "^9.2.1",
 		"eslint-config-xo-react": "^0.27.0",
 		"eslint-plugin-react": "^7.32.2",
 		"eslint-plugin-react-hooks": "^4.6.0",
-		"import-jsx": "^5.0.0",
 		"ink-testing-library": "^3.0.0",
-		"nodemon": "^3.1.11",
-		"oxfmt": "^0.24.0",
-		"oxlint": "^1.39.0",
+		"oxfmt": "^0.26.0",
+		"oxlint": "^1.41.0",
 		"prettier": "^2.8.7",
+		"ts-node": "^10.9.1",
+		"typescript": "^5.0.3",
 		"xo": "^0.53.1"
 	},
 	"ava": {
-		"environmentVariables": {
-			"NODE_NO_WARNINGS": "1"
+		"extensions": {
+			"ts": "module",
+			"tsx": "module"
 		},
 		"nodeArguments": [
-			"--loader=import-jsx"
+			"--loader=ts-node/esm"
 		]
 	},
 	"xo": {
@@ -55,10 +57,5 @@
 			"react/prop-types": "off"
 		}
 	},
-	"prettier": "@vdemedes/prettier-config",
-	"babel": {
-		"presets": [
-			"@babel/preset-react"
-		]
-	}
+	"prettier": "@vdemedes/prettier-config"
 }
