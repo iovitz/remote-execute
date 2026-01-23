@@ -1,16 +1,9 @@
 import React, { PropsWithChildren } from "react";
 import { Box, Text } from "ink";
+import ClientList from "./components/client-list.js";
 
 function MainLayout({ children }: PropsWithChildren) {
-	return <Box>{children}</Box>;
-}
-
-function SideBar() {
-	return (
-		<Box borderStyle={"single"} height={"100%"} width={40}>
-			<Text>I'm a sidebar</Text>
-		</Box>
-	);
+	return <Box borderStyle="classic">{children}</Box>;
 }
 
 function Content() {
@@ -24,7 +17,7 @@ function Content() {
 export default function App() {
 	return (
 		<MainLayout>
-			<SideBar />
+			<ClientList />
 			<Content />
 		</MainLayout>
 	);
