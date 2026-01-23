@@ -1,24 +1,44 @@
 import React from "react";
 import { Box, Text } from "ink";
 import SelectInput from "ink-select-input";
+import { useSocket } from "../socket/socket-context.js";
 import { Item } from "../types/types.js";
 
 export default function ClientList() {
-	const navItems = [
-		{ label: "Pane 1", value: "pane_one" },
-		{ label: "Pane 2", value: "pane_two" },
-		{ label: "Exit", value: "exit" },
-	];
-	const onSelect = (value: Item<string>) => {
-		console.log(value);
+	const { clients, selectClient } = useSocket();
+
+	// Convert clients to select items
+	const clientItems: Item<string>[] = clients.map((client) => ({
+		label: client.id.slice(0, 6),
+		value: client.id,
+		key: client.id,
+	}));
+
+	const handleSelect = (item: Item<string>) => {
+		selectClient(item.value);
 	};
+
 	return (
-		<Box width="7" height={"100%"} flexDirection="column">
-			<Box>
-				<Text>Client List</Text>
-			</Box>
+		<Box width={30} height={"100%"} flexDirection="column">
 			<Box borderStyle="classic">
-				<SelectInput items={navItems} onSelect={onSelect} />
+				<Text color="cyan" bold>
+					Connected Clients ({clients.length})
+				</Text>
+			</Box>
+			<Box borderStyle="classic" flexGrow={1}>
+				{clients.length === 0 ? (
+					<Box padding={1}>
+						<Text color="gray">No clients connected</Text>
+					</Box>
+				) : (
+					<SelectInput
+						items={clientItems}
+						onSelect={handleSelect}
+						indicatorComponent={({ isSelected }) => (
+							<Text color={isSelected ? "green" : "gray"}>{isSelected ? "▶" : "○"}</Text>
+						)}
+					/>
+				)}
 			</Box>
 		</Box>
 	);
